@@ -12,10 +12,9 @@ const stateMachine = reactive(store.state)
 	<div :class="$style.container">
 		<Message v-for="message in stateMachine.history" :text="message.label" :id="message.id" :is-user="message.isUser" />
 
-		<button v-if="stateMachine.state == EStates.OFF" type="button"
-		:class="[$style.startChat, 'bg-slate-600']"
+		<button v-if="stateMachine.state == EStates.OFF" type="button" :class="[$style.startChat, 'btn']"
 			@click="stateMachine.start">
-			startChat
+			Iniciar Conversa
 		</button>
 
 		<template v-else>
@@ -27,7 +26,8 @@ const stateMachine = reactive(store.state)
 		</template>
 	</div>
 
-	<Modal />
+
+	<Modal v-if="store.modal.isOpen" />
 </template>
 <style module lang="scss">
 .container {
@@ -61,9 +61,7 @@ const stateMachine = reactive(store.state)
 		border: 0;
 		cursor: pointer;
 
-		&:hover {
-			background-color: #adadad;
-		}
+
 	}
 
 	.wrapperButtons {

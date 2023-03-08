@@ -15,3 +15,9 @@ export interface IAction {
 	id: string;
 	label: string;
 }
+
+export interface IModalContent {
+	id: string;
+	title: string;
+	body: string;
+}

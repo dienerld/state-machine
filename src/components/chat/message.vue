@@ -7,11 +7,9 @@ interface Props {
 }
 defineProps<Props>();
 
-onMounted(() => {
-});
 </script>
 <template>
-	<div :class="[$style.container, { [$style.end]: isUser }]">
+	<div :class="[$style.container, { [$style.right]: isUser }]">
 		<span>{{ text }}</span>
 	</div>
 </template>
@@ -31,7 +29,7 @@ onMounted(() => {
 
 }
 
-.end {
+.right {
 	align-self: flex-end;
 }
 </style>

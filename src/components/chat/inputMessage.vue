@@ -15,17 +15,19 @@ const handleClick = (action: IAction) => {
 		isUser: true
 	})
 	if (store.state.state === EStates.STATE3) {
+		store.hidrateModal(action.id)
 		store.setIsOpenModal(true)
+
 	}
 }
 
 </script>
 <template>
 	<div :class="$style.container">
-		<button type="button" v-for="action in actions" :key="action.id" @click="handleClick(action)">
+		<button type="button" v-for="action in actions" :key="action.id" @click="handleClick(action)" class="btn">
 			{{ action.label }}
 		</button>
-		<button v-if="store.state.state !== EStates.STATE1" type="button" @click="store.previous">
+		<button v-if="store.state.state !== EStates.STATE1" type="button" @click="store.previous" class="btn">
 			Voltar
 		</button>
 
@@ -46,15 +48,10 @@ const handleClick = (action: IAction) => {
 		border-radius: 8px;
 		border: 0;
 		outline: none;
-		background-color: blueviolet;
 
-		&:focus {
-			border: 1px solid #9d9d9d;
-		}
 	}
 
 	button {
-		flex: 1;
 		padding: 0.5rem;
 		font-weight: bold;
 		line-height: 1.4;

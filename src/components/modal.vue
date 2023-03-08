@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import {
 	Dialog,
 	DialogPanel,
@@ -10,6 +10,15 @@ import { stateMachineStore } from '../store';
 
 const store = stateMachineStore();
 const modal = reactive(store.modal)
+
+
+onMounted(() => {
+	if (!modal?.content?.id) {
+		alert('Nenhum dado disponível')
+		store.setIsOpenModal(false)
+		store.previous()
+	}
+})
 
 
 const closeModal = () => {
@@ -23,15 +32,13 @@ const closeModal = () => {
 		<div class="fixed inset-0 flex items-center justify-center p-4">
 
 			<DialogPanel class="w-full max-w-sm rounded-md bg-white p-4">
-				<DialogTitle :class="$style.dialogTitle">Titulo Loja</DialogTitle>
+				<DialogTitle :class="$style.dialogTitle">{{ modal.content.title }}</DialogTitle>
 				<DialogDescription :class="$style.DialogDescription">
 					Breve descrição
 				</DialogDescription>
 
 				<div class="flex flex-1 mt-4 gap-4 flex-col">
-					<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat voluptas, modi commodi voluptatem aliquid
-						eligendi ab aut consequuntur voluptates sint fugiat cum omnis a. Laboriosam nam dolores consequuntur fugit
-						iusto?</p>
+					<p>{{ modal.content.body }}</p>
 
 					<div :class="$style.wrapperButtons">
 						<button @click="">

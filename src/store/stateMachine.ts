@@ -2,20 +2,20 @@ import { EStates, IAction, IMessage } from "./types";
 
 const data = [
 	{
-		id: "mechanic",
-		label: "Oficina Mecânica",
+		id: "supermarkets",
+		label: "Supermercados",
 		actions: [
 			{
-				id: "loja 1",
-				label: "Loja 1",
+				id: "bh",
+				label: "BH",
 			},
 			{
-				id: "loja 2",
-				label: "Loja 2",
+				id: "bergao",
+				label: "Bergão",
 			},
 			{
-				id: "loja 3",
-				label: "Loja 3",
+				id: "esquinao",
+				label: "Esquinão",
 			},
 		],
 	},
@@ -42,12 +42,12 @@ const data = [
 		label: "Escritórios",
 		actions: [
 			{
-				id: "loja 1",
-				label: "Loja 1",
+				id: "adv1",
+				label: "Advogados 1",
 			},
 			{
-				id: "loja 2",
-				label: "Loja 2",
+				id: "adv2",
+				label: "Advogados 2",
 			},
 			{
 				id: "loja 3",
