@@ -1,21 +1,34 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
-import { IAction } from '../../store/store'
+import { EStates, IAction, stateMachineStore } from '../../store'
 interface Props {
 	actions: IAction[]
 }
 defineProps<Props>();
+const store = stateMachineStore();
 
-const handleClick = () => {
-	console.log("dsds")
+const handleClick = (action: IAction) => {
+	store.next(action.id)
+	store.addHistory({
+		id: action.id,
+		label: action.label,
+		isUser: true
+	})
+	if (store.state.state === EStates.STATE3) {
+		store.setIsOpenModal(true)
+	}
 }
 
 </script>
 <template>
 	<div :class="$style.container">
-		<button type="button" v-for="action in actions" :key="action.id" @click="handleClick">
+		<button type="button" v-for="action in actions" :key="action.id" @click="handleClick(action)">
 			{{ action.label }}
 		</button>
+		<button v-if="store.state.state !== EStates.STATE1" type="button" @click="store.previous">
+			Voltar
+		</button>
+
 	</div>
 </template>
 <style module lang="scss">
@@ -27,12 +40,13 @@ const handleClick = () => {
 
 	margin-top: 1rem;
 
-	input {
+	button {
 		flex: 4;
 		padding: 0.5rem;
 		border-radius: 8px;
 		border: 0;
 		outline: none;
+		background-color: blueviolet;
 
 		&:focus {
 			border: 1px solid #9d9d9d;

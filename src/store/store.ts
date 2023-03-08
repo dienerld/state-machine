@@ -1,76 +1,29 @@
 import { defineStore } from "pinia";
-
-export enum EStates {
-	OFF = "OFF",
-	STATE1 = "STATE1",
-	STATE2 = "STATE2",
-	STATE3 = "STATE3",
-}
-
-interface IMessage {
-	id: string;
-	label: string;
-}
-
-export interface IAction {
-	id: string;
-	label: string;
-}
-
-class StateMachine {
-	state: EStates;
-	message!: IMessage;
-	actions!: IAction[];
-
-	constructor() {
-		this.state = EStates.STATE1;
-	}
-
-	start() {
-		this.state = EStates.STATE1;
-	}
-
-	next() {
-		switch (this.state) {
-			case EStates.STATE1:
-				this.state = EStates.STATE2;
-				break;
-			case EStates.STATE2:
-				this.state = EStates.STATE3;
-				break;
-			case EStates.STATE3:
-				this.state = EStates.STATE1;
-				break;
-		}
-	}
-
-	previous() {
-		switch (this.state) {
-			case EStates.STATE1:
-				this.state = EStates.STATE3;
-				break;
-			case EStates.STATE2:
-				this.state = EStates.STATE1;
-				break;
-			case EStates.STATE3:
-				this.state = EStates.STATE2;
-				break;
-		}
-	}
-}
+import { StateMachine } from "./stateMachine";
+import { IAction, IMessage } from "./types";
 
 export const stateMachineStore = defineStore("stateMachine", {
-	state: () => new StateMachine(),
-
+	state: () => ({
+		state: new StateMachine(),
+		modal: {
+			isOpen: false,
+		},
+	}),
 	actions: {
 		start() {
-			this.start();
+			this.state.start();
 		},
-		next() {
-			this.next();
+		addHistory(action: IMessage) {
+			this.state.addHistory(action);
+		},
+		next(id: string) {
+			this.state.next(id);
 		},
 		previous() {
-			this.previous();
+			this.state.previous();
+		},
+		setIsOpenModal(value: boolean) {
+			this.modal.isOpen = value;
 		},
 	},
 });

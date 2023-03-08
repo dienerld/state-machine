@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@chat-ui/vue3": "^1.0.11",
+    "@headlessui/vue": "^1.7.12",
+    "autoprefixer": "^10.4.13",
     "pinia": "^2.0.33",
+    "postcss": "^8.4.21",
     "sass": "^1.58.3",
+    "tailwindcss": "^3.2.7",
     "vue": "^3.2.45",
     "vue-bot-ui": "^0.2.8"
   },

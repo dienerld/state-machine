@@ -3,7 +3,7 @@ import { defineProps, onMounted } from "vue";
 
 interface Props {
 	text: string;
-	isUserMessage?: boolean;
+	isUser?: boolean;
 }
 defineProps<Props>();
 
@@ -11,7 +11,7 @@ onMounted(() => {
 });
 </script>
 <template>
-	<div :class="[$style.container, { [$style.end]: isUserMessage }]">
+	<div :class="[$style.container, { [$style.end]: isUser }]">
 		<span>{{ text }}</span>
 	</div>
 </template>
